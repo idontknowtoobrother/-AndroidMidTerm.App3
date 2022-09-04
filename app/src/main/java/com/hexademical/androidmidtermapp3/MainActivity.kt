@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         for(oil in oilData){
             val oilInit = Oil(oil[0].toString(), oil[1].toString().toDouble())
             oilArrs.add(oilInit)
-            Log.d("InitOilData", "Name:${oilInit.getOilName()} / Price:${oilInit.getOilPrice()}")
+            Log.d("InitToOilArrays", "Name:${oilInit.getOilName()} / Price:${oilInit.getOilPrice()}")
         }
 
 
