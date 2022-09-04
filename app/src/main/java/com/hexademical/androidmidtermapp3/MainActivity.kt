@@ -3,11 +3,17 @@ package com.hexademical.androidmidtermapp3
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var oilArrs: ArrayList<Oil>;
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
 
         // because of if one day we do a real app we should get data from api and init to oilArrs
         val oilData = arrayOf(
@@ -30,9 +36,10 @@ class MainActivity : AppCompatActivity() {
             Log.d("InitToOilArrays", "Name:${oilInit.getOilName()} / Price:${oilInit.getOilPrice()}")
         }
 
+        var recyclerView: RecyclerView? = findViewById(R.id.oil_price_recycler);
+        recyclerView?.layoutManager = LinearLayoutManager(this)
+        recyclerView?.adapter = Adapter(oilArrs)
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
 
 
