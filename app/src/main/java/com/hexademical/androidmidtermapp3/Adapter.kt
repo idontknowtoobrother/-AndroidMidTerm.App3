@@ -5,9 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
-import android.widget.Toast
 
 class Adapter(val oilArrs: ArrayList<Oil>):RecyclerView.Adapter<ModalViewHolder>() {
     private lateinit var oilListener: onItemClickListener
