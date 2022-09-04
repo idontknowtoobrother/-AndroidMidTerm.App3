@@ -1,9 +1,11 @@
 package com.hexademical.androidmidtermapp3
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -38,8 +40,16 @@ class MainActivity : AppCompatActivity() {
 
         var recyclerView: RecyclerView? = findViewById(R.id.oil_price_recycler);
         recyclerView?.layoutManager = LinearLayoutManager(this)
-        recyclerView?.adapter = Adapter(oilArrs)
+        var adapter = Adapter(oilArrs);
+        recyclerView?.adapter = adapter;
 
+        adapter.setOnItemClickListener(object : Adapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                var description = "${oilArrs[position].getOilName().toString()} / ${oilArrs[position].getOilPrice().toString()}"
+                Toast.makeText(applicationContext, description, Toast.LENGTH_SHORT).show()
+                Log.d("OnOilClick", description)
+            }
+        })
     }
 
 

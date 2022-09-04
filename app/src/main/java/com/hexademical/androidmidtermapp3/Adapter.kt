@@ -7,11 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
+import android.widget.Toast
 
 class Adapter(val oilArrs: ArrayList<Oil>):RecyclerView.Adapter<ModalViewHolder>() {
+    private lateinit var oilListener: onItemClickListener
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        oilListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModalViewHolder {
-        return ModalViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.oil_modal, parent, false))
+        return ModalViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.oil_modal, parent, false), oilListener)
     }
 
     override fun onBindViewHolder(holder: ModalViewHolder, position: Int) {
@@ -25,7 +35,12 @@ class Adapter(val oilArrs: ArrayList<Oil>):RecyclerView.Adapter<ModalViewHolder>
 }
 
 
-class ModalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ModalViewHolder(itemView: View, listener: Adapter.onItemClickListener) : RecyclerView.ViewHolder(itemView) {
     internal var oilNameView : TextView = itemView.findViewById(R.id.oil_name)
     internal var oilPriceView : TextView = itemView.findViewById(R.id.oil_price)
+    init {
+        itemView.setOnClickListener{
+            listener.onItemClick(adapterPosition);
+        }
+    }
 }
